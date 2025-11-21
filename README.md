@@ -1,6 +1,6 @@
 📌 GitHub Repo Stats API
 
-A FastAPI project that fetches and aggregates key details of any public GitHub repository — including name, description, stars, forks, watchers, open issues, and commit activity — and returns them as clean JSON.
+A FastAPI project that fetches and aggregates key details of any public GitHub repository including name, description, stars, forks, watchers, open issues, commit activity and returns them as clean JSON.
 A simple HTML/JS UI is included to instantly display repo stats entered by the user.
 
 🚀 Features
