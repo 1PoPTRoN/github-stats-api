@@ -39,7 +39,7 @@ function getHealthStatus(pushedAt) {
     if (days <= 30) return { label: "Very Active", className: "status-active" };
     if (days <= 180) return { label: "Maintained", className: "status-active" };
     if (days <= 365) return { label: "Stale", className: "status-stale" };
-    return { label: "Dead 💀", className: "status-dead" };
+    return { label: "Dead", className: "status-dead" };
 }
 
 async function fetchRepoData() {
