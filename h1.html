@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>GitHub Repo Health Stats</title>
+    <link rel="stylesheet" href="h1.css" />
+</head>
+<body>
+    <div class="card">
+        <h1>Github Explorer</h1>
+        <p class="subtitle">Insights that tell whether a project is updated, stale, or dead.</p>
+        <div class="input-row">
+            <input id="repoUrl" type="text" placeholder="https://github.com/owner/repo" />
+            <button id="checkBtn">Analyze ↵</button>
+        </div>
+        <div id="error"></div>
+        <div id="repoInfo" style="display:none;">
+            <div id="repoHeader">
+                <img id="avatar" src="" alt="Owner avatar">
+                <div>
+                    <p id="repoName"></p>
+                    <p id="repoDesc"></p>
+                    <a id="redirectBtn" href="#" target="_blank">🔗 Open on GitHub</a>
+                </div>
+            </div>
+
+            <p id="lastUpdated" class="subtitle"></p>
+            <div id="statusBadge" class="status-badge"></div>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-label">Stars</div>
+                    <div class="stat-value" id="stars">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Forks</div>
+                    <div class="stat-value" id="forks">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Watchers</div>
+                    <div class="stat-value" id="watchers">-</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Open Issues</div>
+                    <div class="stat-value" id="issues">-</div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Stats · Bar Chart</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="h1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
