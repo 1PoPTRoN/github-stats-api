@@ -7,10 +7,10 @@ app = FastAPI()
 @app.get("/", response_class=HTMLResponse)
 def home():
     try:
-        with open("h1.html", "r", encoding="utf-8") as file:
+        with open("index.html", "r", encoding="utf-8") as file:
             return HTMLResponse(file.read())
     except:
-        raise HTTPException(status_code=500, detail="h1.html missing")
+        raise HTTPException(status_code=500, detail="index.html missing")
 
 def parse_repo(raw):
     raw = raw.strip()
