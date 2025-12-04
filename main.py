@@ -6,7 +6,7 @@ import os
 
 app = FastAPI()
 
-GITHUB_TOKEN = os.getenv("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")
+GITHUB_TOKEN = os.getenv("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")
 
 
 # -----------------------------
@@ -93,5 +93,6 @@ def repo_stats(repo: str):
             "avatar_url": data.get("owner", {}).get("avatar_url"),
         },
     }
+
 
     return JSONResponse(result)
