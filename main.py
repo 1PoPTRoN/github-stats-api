@@ -6,7 +6,7 @@ import os
 
 app = FastAPI()
 
-GITHUB_TOKEN = os.getenv("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")
+GITHUB_TOKEN = os.getenv("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")
 
 
 # -----------------------------
@@ -96,3 +96,4 @@ def repo_stats(repo: str):
 
 
     return JSONResponse(result)
+
