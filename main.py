@@ -14,6 +14,7 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")  # set this in your shell
 
 print("DEBUG: GITHUB_TOKEN loaded?", bool(GITHUB_TOKEN))  # will print True/False
 
+
 # -------------------------
 # Serve frontend
 # -------------------------
@@ -24,6 +25,7 @@ def home():
             return HTMLResponse(file.read())
     except Exception:
         raise HTTPException(status_code=500, detail="index.html missing")
+
 
 # -------------------------
 # Helper: parse repo input
@@ -41,6 +43,7 @@ def parse_repo(raw: str):
         )
     return parts[0], parts[1]
 
+
 # -------------------------
 # Pydantic "DB schema"
 # -------------------------
@@ -57,7 +60,9 @@ class RepoModel(BaseModel):
     owner_login: str | None
     owner_avatar: str | None
 
+
 DATA_PATH = "data/repositories.json"
+
 
 # -------------------------
 # Load / Save helpers
@@ -70,6 +75,7 @@ def load_all_repos():
             return json.load(f)
     except Exception:
         return []
+
 
 def save_repo_to_file(repo: RepoModel):
     os.makedirs("data", exist_ok=True)
@@ -87,6 +93,7 @@ def save_repo_to_file(repo: RepoModel):
 
     with open(DATA_PATH, "w") as f:
         json.dump(existing, f, indent=4)
+
 
 # -------------------------
 # Main API: fetch repo stats
@@ -165,12 +172,14 @@ def repo_stats(repo: str):
     save_repo_to_file(repo_obj)
     return JSONResponse(result)
 
+
 # -------------------------
 # READ history
 # -------------------------
 @app.get("/api/history")
 def get_history():
     return JSONResponse(load_all_repos())
+
 
 # -------------------------
 # DELETE from history
@@ -185,6 +194,5 @@ def delete_repo(full_name: str):
 
     with open(DATA_PATH, "w") as f:
         json.dump(new_data, f, indent=4)
-
 
     return {"detail": f"{full_name} deleted"}
