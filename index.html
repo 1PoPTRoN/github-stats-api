@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Repo Explorer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --muted: #8b949e;
+            --accent: #238636;
+            --accent-hover: #2ea043;
+            --error: #f85149;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--card);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            margin: 0 0 8px 0;
+        }
+
+        input {
+            width: 70%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #0c0f14;
+            color: var(--text);
+        }
+
+        button {
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            background: var(--accent);
+            color: white;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+        }
+
+        #errorBox {
+            color: var(--error);
+            margin-top: 10px;
+        }
+
+        #repoResult {
+            margin-top: 18px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 12px;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 6px;
+        }
+
+        .delete-btn {
+            background: #f85149;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            border: none;
+        }
+
+        .delete-btn:hover {
+            opacity: 0.8;
+        }
+
+        .chart-box {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            margin-top: 20px;
+            background: #0b1016;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>GitHub Repository Explorer</h1>
+
+        <input id="repoInput" type="text" placeholder="torvalds/linux or full GitHub URL">
+        <button onclick="fetchRepo()">Analyze</button>
+
+        <div style="margin-top:10px;">
+            <button style="background:#30363d;" onclick="loadHistory()">View Saved Repositories</button>
+        </div>
+
+        <div id="errorBox"></div>
+        <div id="repoResult"></div>
+
+        <div class="chart-box">
+            <canvas id="repoChart" height="120"></canvas>
+        </div>
+
+        <div id="historyBox"></div>
+
+    </div>
+
+    <script>
+        let repoChart = null;
+
+        async function fetchRepo() {
+            const repo = document.getElementById("repoInput").value.trim();
+            const errorBox = document.getElementById("errorBox");
+            const repoResult = document.getElementById("repoResult");
+
+            errorBox.textContent = "";
+            repoResult.innerHTML = "";
+
+            if (!repo) {
+                errorBox.textContent = "Enter a repository name.";
+                return;
+            }
+
+            const res = await fetch(`/api/repo-stats?repo=${encodeURIComponent(repo)}`);
+            const data = await res.json();
+
+            if (!res.ok) {
+                errorBox.textContent = data.detail || "Error";
+                return;
+            }
+
+            repoResult.innerHTML = `
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <img src="${data.owner.avatar_url}" width="60" height="60" style="border-radius:50%;border:1px solid var(--border);">
+                    <div>
+                        <h3 style="margin:0;"><a href="${data.html_url}" style="color:#58a6ff;">${data.full_name}</a></h3>
+                        <p style="color:var(--muted);font-size:13px;margin:0;">by ${data.owner.login}</p>
+                    </div>
+                </div>
+
+                <p style="margin:10px 0;">${data.description || "No description available."}</p>
+
+                <ul style="list-style:none;padding:0;font-size:14px;">
+                    <li>⭐ Stars: ${data.stars}</li>
+                    <li>🍴 Forks: ${data.forks}</li>
+                    <li>👀 Watchers: ${data.watchers}</li>
+                    <li>🐛 Open Issues: ${data.open_issues}</li>
+                    <li>⏳ Last Push: ${data.pushed_at}</li>
+                    <li>🔄 Updated: ${data.updated_at}</li>
+                </ul>
+            `;
+
+            drawChart(data);
+        }
+
+        function drawChart(data) {
+            const ctx = document.getElementById("repoChart").getContext("2d");
+
+            if (repoChart) repoChart.destroy();
+
+            repoChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["Stars", "Forks", "Watchers", "Open Issues"],
+                    datasets: [{
+                        data: [
+                            data.stars,
+                            data.forks,
+                            data.watchers,
+                            data.open_issues
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        async function loadHistory() {
+            const box = document.getElementById("historyBox");
+            box.innerHTML = "Loading...";
+
+            const res = await fetch("/api/history");
+            const data = await res.json();
+
+            if (data.length === 0) {
+                box.innerHTML = "<p>No saved repositories.</p>";
+                return;
+            }
+
+            let rows = data.map(r => `
+                <tr>
+                    <td>${r.full_name}</td>
+                    <td>${r.stars}</td>
+                    <td>${r.forks}</td>
+                    <td>${r.watchers}</td>
+                    <td>${r.open_issues}</td>
+                    <td><button class='delete-btn' onclick="deleteRepo('${r.full_name}')">Delete</button></td>
+                </tr>
+            `).join("");
+
+            box.innerHTML = `
+                <h2>Saved Repositories</h2>
+                <table>
+                    <tr>
+                        <th>Name</th><th>Stars</th><th>Forks</th><th>Watchers</th><th>Issues</th><th>Action</th>
+                    </tr>
+                    ${rows}
+                </table>
+            `;
+        }
+
+        async function deleteRepo(fullName) {
+            if (!confirm(`Delete ${fullName}?`)) return;
+
+            const res = await fetch(`/api/history?full_name=${fullName}`, { method: "DELETE" });
+
+            if (res.ok) {
+                loadHistory();
+            }
+        }
+    </script>
+</body>
+</html>
