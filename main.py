@@ -10,7 +10,7 @@ app = FastAPI()
 # -------------------------
 # GitHub Token (from env)
 # -------------------------
-GITHUB_TOKEN = os.getenv("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")  # set this in your shell
+GITHUB_TOKEN = os.getenv("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")  # set this in your shell
 
 print("DEBUG: GITHUB_TOKEN loaded?", bool(GITHUB_TOKEN))  # will print True/False
 
@@ -194,5 +194,6 @@ def delete_repo(full_name: str):
 
     with open(DATA_PATH, "w") as f:
         json.dump(new_data, f, indent=4)
+
 
     return {"detail": f"{full_name} deleted"}
