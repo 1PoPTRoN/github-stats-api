@@ -3,42 +3,35 @@ from fastapi.responses import HTMLResponse, JSONResponse
 import httpx
 import os
 
-
 app = FastAPI()
 
 GITHUB_TOKEN = os.getenv("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")
 
 
-# -----------------------------
-# Home route: serves index.html
-# -----------------------------
 @app.get("/", response_class=HTMLResponse)
 def home():
     try:
         with open("index.html", "r", encoding="utf-8") as f:
-            html = f.read()
+            return HTMLResponse(f.read())
     except FileNotFoundError:
-        raise HTTPException(status_code=500, detail="index.html file not found")
+        raise HTTPException(status_code=500, detail="index.html not found")
 
-    return HTMLResponse(html)
 
-def parse_repo(raw: str) -> tuple[str, str]:
-    text = raw.strip()
+def parse_repo(raw: str):
+    raw = raw.strip()
 
-    if "github.com" in text:
-        text = text.split("github.com/", 1)[1]
+    if "github.com" in raw:
+        raw = raw.split("github.com/", 1)[1]
 
-    parts = text.strip("/").split("/")
-
+    parts = raw.strip("/").split("/")
     if len(parts) < 2:
         raise HTTPException(
             status_code=400,
-            detail="Enter repository as 'owner/repo' or full GitHub URL.",
+            detail="Enter repo as owner/repo or full GitHub URL.",
         )
 
-    owner = parts[0]
-    repo = parts[1]
-    return owner, repo
+    return parts[0], parts[1]
+
 
 @app.get("/api/repo-stats")
 def repo_stats(repo: str):
@@ -47,36 +40,36 @@ def repo_stats(repo: str):
 
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "github-repo-explorer",
+        "User-Agent": "github-explorer-demo",
     }
 
     if GITHUB_TOKEN:
-        headers["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+        headers["Authorization"] = f"token {GITHUB_TOKEN}"
+    else:
+        print("!! WARNING: No GITHUB_TOKEN found in environment")
 
     try:
-        response = httpx.get(url, headers=headers, timeout=10)
+        resp = httpx.get(url, headers=headers, timeout=10)
     except httpx.RequestError as exc:
         print("Error contacting GitHub:", exc)
-        raise HTTPException(status_code=502, detail="Could not reach GitHub API.")
+        raise HTTPException(status_code=502, detail="Could not reach GitHub API")
 
-    # handle common error cases
-    if response.status_code == 404:
-        raise HTTPException(status_code=404, detail="Repository not found.")
+    print("GitHub status:", resp.status_code)
 
-    if response.status_code == 403:
-        # usually rate limit / permission
-        msg = response.json().get("message", "Forbidden / rate limited by GitHub.")
+    if resp.status_code == 404:
+        raise HTTPException(status_code=404, detail="Repository not found")
+
+    if resp.status_code == 403:
+        body = resp.json()
+        msg = body.get("message", "Forbidden / rate limited")
         print("GitHub 403:", msg)
         raise HTTPException(status_code=502, detail=msg)
 
-    if response.status_code != 200:
-        print("GitHub error:", response.status_code, response.text)
-        raise HTTPException(
-            status_code=502,
-            detail=f"GitHub error: {response.status_code}",
-        )
+    if resp.status_code != 200:
+        print("GitHub error:", resp.status_code, resp.text)
+        raise HTTPException(status_code=502, detail=f"GitHub error {resp.status_code}")
 
-    data = response.json()
+    data = resp.json()
 
     result = {
         "full_name": data.get("full_name"),
@@ -94,7 +87,4 @@ def repo_stats(repo: str):
         },
     }
 
-
     return JSONResponse(result)
-
-
