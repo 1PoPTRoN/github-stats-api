@@ -43,54 +43,54 @@ Auth	             GitHub Personal Access Token
 git clone https://github.com/your-username/repo-explorer.git
 cd repo-explorer
 
-2️⃣ Install Dependencies
+<h3>2️⃣ Install Dependencies</h3>
 pip install fastapi uvicorn httpx pydantic
 
-3️⃣ Set Your GitHub Token
+<h3>3️⃣ Set Your GitHub Token</h3>
 
-Linux / macOS
+<h6>Linux / macOS</h6>
 
 export GITHUB_TOKEN="your_token_here"
 
 
-Windows PowerShell
+<h6>Windows PowerShell</h6>
 
 setx GITHUB_TOKEN "your_token_here"
 
-4️⃣ Run Server
+<h3>4️⃣ Run Server</h3>
 uvicorn main:app --reload
 
-5️⃣ Open in Browser
+<h3>5️⃣ Open in Browser</h3>
 http://localhost:8000
 
-🧠 How It Works
+<h1>🧠 How It Works</h1>
 
-User enters a GitHub repo → Frontend sends it to FastAPI
+<ol>1. User enters a GitHub repo → Frontend sends it to FastAPI</ol>
 
-Backend fetches live data from GitHub API using token auth
+<ol>2. Backend fetches live data from GitHub API using token auth</ol>
 
-Pydantic validates & structures data
+<ol>3. Pydantic validates & structures data</ol>
 
-JSON file stores repo (Create/Update)
+<ol>4. JSON file stores repo (Create/Update)</ol>
 
-User can view or delete saved repos (Read/Delete)
+<ol>5. User can view or delete saved repos (Read/Delete)</ol>
 
-Chart.js visualizes repo stats
+<ol>6. Chart.js visualizes repo stats</ol>
 
-📚 API Routes
-🔹 GET /api/repo-stats?repo=owner/repo
+<h1>📚 API Routes</h1>
+<ol>🔹 GET /api/repo-stats?repo=owner/repo</ol>
 
 Fetch repo details + auto-save to history.
 
-🔹 GET /api/history
+<ol>🔹 GET /api/history</ol>
 
 Return all saved repositories.
 
-🔹 DELETE /api/history?full_name=owner/repo
+<ol>🔹 DELETE /api/history?full_name=owner/repo</ol>
 
 Delete a repository from saved history.
 
-🗂️ Project Structure
+<h1>🗂️ Project Structure</h1>
 root/
 ├── main.py              # FastAPI backend
 ├── index.html           # Frontend UI
@@ -98,24 +98,24 @@ root/
 │   └── repositories.json # Database (auto-created)
 └── README.md
 
-🚀 Future Enhancements
+<h1>🚀 Future Enhancements</h1>
 
-Repo comparison mode
+<ol>1. Repo comparison mode</ol>l
 
-Cloud deployment (Render/Railway/Vercel)
+<ol>2. Cloud deployment (Render/Railway/Vercel)</ol>
 
-Switchable light/dark themes
+<ol>3. Switchable light/dark themes</ol>
 
-Real database (SQLite/Postgres)
+<ol>4. Real database (SQLite/Postgres)</ol>
 
-User login system
+<ol>5. User login system</ol>
 
-👨‍💻 Contributors
+<h1>👨‍💻 Contributors</h1>
 
-Arpit – Backend + Frontend Integration
+  Arpit – Backend + Frontend Integration
 
-Teammate – UI, CRUD, Documentation
+  Aabid Sattar – UI, CRUD, Documentation
 
-⭐ If you like this project
+<h1>⭐ If you like this project</h1>
 
 Leave a star on GitHub! It motivates the devs 😎🌟
