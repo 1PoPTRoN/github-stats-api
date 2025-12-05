@@ -16,11 +16,11 @@ A clean, fast, GitHub-themed web app that lets you analyze any public GitHub rep
 
 🧩 Full CRUD
 
-<ol>Create/Update → Auto-save repo stats</ol>
+<ol>1. Create/Update → Auto-save repo stats</ol>
 
-<ol>Read → History list</ol>
+<ol>2. Read → History list</ol>
 
-<ol>Delete → Remove repo from history</ol>
+<ol>3. Delete → Remove repo from history</ol>
 
 🎨 GitHub-style dark UI
 
@@ -28,26 +28,18 @@ A clean, fast, GitHub-themed web app that lets you analyze any public GitHub rep
 
 🔥 Perfect for learning FastAPI + API integration + CRUD design
 
-🏗️ Tech Stack
-Layer	Tech
-Backend	FastAPI, Python
-API Client	httpx
-Schema	Pydantic
-Storage	JSON file database
-Frontend	HTML, CSS, JavaScript
-Charts	Chart.js
-Auth	GitHub Personal Access Token
-📸 Screenshots (Add yours)
-📁 /screenshots
-    ui.png
-    chart.png
-    history.png
+<h1>🏗️ Tech Stack</h1>
+Layer	             Tech
+Backend	FastAPI,     Python
+API Client	         httpx
+Schema	             Pydantic
+Storage	             JSON file database
+Frontend	         HTML, CSS, JavaScript
+Charts	             Chart.js
+Auth	             GitHub Personal Access Token
 
-
-Add images here once you run the project.
-
-🔧 Installation & Setup
-1️⃣ Clone Repo
+<h1>🔧 Installation & Setup</h1>
+<h3>1️⃣ Clone Repo</h3>
 git clone https://github.com/your-username/repo-explorer.git
 cd repo-explorer
 
