@@ -16,11 +16,11 @@ A clean, fast, GitHub-themed web app that lets you analyze any public GitHub rep
 
 🧩 Full CRUD
 
-<ul>Create/Update → Auto-save repo stats</ui>
+<ol>Create/Update → Auto-save repo stats</ol>
 
-<ul>Read → History list</ul>
+<ol>Read → History list</ol>
 
-<ul>Delete → Remove repo from history</ul>
+<ol>Delete → Remove repo from history</ol>
 
 🎨 GitHub-style dark UI
 
