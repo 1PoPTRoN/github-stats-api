@@ -2,7 +2,7 @@
 
 A clean, fast, GitHub-themed web app that lets you analyze any public GitHub repository with real-time stats, visuals, CRUD history, and token-powered API access — built using FastAPI + Pydantic + httpx + Chart.js.
 
-⭐ Features
+<h1>⭐ Features</h1>
 
 🔍 Search any GitHub repo (owner/repo or URL)
 
@@ -16,11 +16,11 @@ A clean, fast, GitHub-themed web app that lets you analyze any public GitHub rep
 
 🧩 Full CRUD
 
-Create/Update → Auto-save repo stats
+<ul>Create/Update → Auto-save repo stats</ui>
 
-Read → History list
+<ul>Read → History list</ul>
 
-Delete → Remove repo from history
+<ul>Delete → Remove repo from history</ul>
 
 🎨 GitHub-style dark UI
 
