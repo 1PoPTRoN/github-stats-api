@@ -29,18 +29,48 @@ A clean, fast, GitHub-themed web app that lets you analyze any public GitHub rep
 🔥 Perfect for learning FastAPI + API integration + CRUD design
 
 <h1>🏗️ Tech Stack</h1>
-Layer	             Tech
-Backend	FastAPI,     Python
-API Client	         httpx
-Schema	             Pydantic
-Storage	             JSON file database
-Frontend	         HTML, CSS, JavaScript
-Charts	             Chart.js
-Auth	             GitHub Personal Access Token
+<table>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Tech</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Backend</td>
+      <td>FastAPI, Python</td>
+    </tr>
+    <tr>
+      <td>API Client</td>
+      <td>httpx</td>
+    </tr>
+    <tr>
+      <td>Schema</td>
+      <td>Pydantic</td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>JSON file database</td>
+    </tr>
+    <tr>
+      <td>Frontend</td>
+      <td>HTML, CSS, JavaScript</td>
+    </tr>
+    <tr>
+      <td>Charts</td>
+      <td>Chart.js</td>
+    </tr>
+    <tr>
+      <td>Auth</td>
+      <td>GitHub Personal Access Token</td>
+    </tr>
+  </tbody>
+</table>
 
 <h1>🔧 Installation & Setup</h1>
 <h3>1️⃣ Clone Repo</h3>
-git clone https://github.com/your-username/repo-explorer.git
+git clone https://github.com/1PoPTRoN/github-stats-api.git
 cd repo-explorer
 
 <h3>2️⃣ Install Dependencies</h3>
@@ -48,12 +78,12 @@ pip install fastapi uvicorn httpx pydantic
 
 <h3>3️⃣ Set Your GitHub Token</h3>
 
-<h6>Linux / macOS</h6>
+<h5>Linux / macOS</h5>
 
 export GITHUB_TOKEN="your_token_here"
 
 
-<h6>Windows PowerShell</h6>
+<h5>Windows PowerShell</h5>
 
 setx GITHUB_TOKEN "your_token_here"
 
@@ -91,16 +121,17 @@ Return all saved repositories.
 Delete a repository from saved history.
 
 <h1>🗂️ Project Structure</h1>
-root/
-├── main.py              # FastAPI backend
-├── index.html           # Frontend UI
-├── data/
-│   └── repositories.json # Database (auto-created)
-└── README.md
+
+root/<br>
+├── main.py‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ # FastAPI backend<br>
+├── index.html‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ # Frontend UI<br>
+├── data/<br>
+│   └── repositories.json‎ ‎ ‎ ‎ ‎ # Database (auto-created)<br>
+└── README.md<br>
 
 <h1>🚀 Future Enhancements</h1>
 
-<ol>1. Repo comparison mode</ol>l
+<ol>1. Repo comparison mode</ol>
 
 <ol>2. Cloud deployment (Render/Railway/Vercel)</ol>
 
