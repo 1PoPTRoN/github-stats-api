@@ -37,12 +37,18 @@ git clone https://github.com/1PoPTRoN/github-stats-api.git
 cd github-stats-api
 ```
 
-### **2️⃣ Install Dependencies**
+### **2️⃣ Setting up virtual environment**
+```bash
+python -m venv <folder-name>
+<folder-name>/Scripts/activate
+```
+
+### **3️⃣ Install Dependencies**
 ```bash
 pip install fastapi uvicorn httpx pydantic
 ```
 
-### **3️⃣ Set Your GitHub Token**
+### **4️⃣ Set Your GitHub Token**
   #### **Linux / macOS**
   ```bash
   export GITHUB_TOKEN="your_token_here"
@@ -53,12 +59,12 @@ pip install fastapi uvicorn httpx pydantic
   setx GITHUB_TOKEN "your_token_here"
   ```
 
-### **4️⃣ Run the FastAPI Server**
+### **5️⃣ Run the FastAPI Server**
 ```bash
 uvicorn main:app --reload
 ```
 
-### **5️⃣ Open the Web App**
+### **6️⃣ Open the Web App**
 ```bash
 http://localhost:8000
 ```
