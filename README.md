@@ -38,10 +38,17 @@ cd github-stats-api
 ```
 
 ### **2️⃣ Setting up virtual environment**
-```bash
-python -m venv <folder-name>
-<folder-name>/Scripts/activate
-```
+  #### **Linux / macOS**
+  ```bash
+  python3 -m venv <folder-name>
+  source <folder-name>/bin/activate
+  ```
+
+  #### **Windows**
+  ```bash
+  python -m venv <folder-name>
+  <folder-name>/Scripts/activate
+  ```
 
 ### **3️⃣ Install Dependencies**
 ```bash
