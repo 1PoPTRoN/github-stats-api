@@ -1,23 +1,23 @@
-# 🚀 GitHub Repository Explorer
+# GitHub Repository Explorer
 
 A clean, fast, GitHub-themed web app that lets you analyze any public GitHub repository with real-time stats, visuals, CRUD history, and token-powered API access — built using **FastAPI**, **Pydantic**, **httpx**, and **Chart.js**.
 
-## ⭐ Features
+## Features
 
-- 🔍 Search any GitHub repository (`owner/repo` or full URL)
-- 👤 Displays owner avatar + repo details
-- 📊 Chart.js visualizations (Stars, Forks, Watchers, Issues)
-- 🔐 GitHub Token Authentication (up to 5,000 requests/hr)
-- 💾 JSON-based Data Persistence
-- 🧩 Full CRUD functionality:
+- Search any GitHub repository (`owner/repo` or full URL)
+- Displays owner avatar + repo details
+- Chart.js visualizations (Stars, Forks, Watchers, Issues)
+- GitHub Token Authentication (up to 5,000 requests/hr)
+- JSON-based Data Persistence
+- Full CRUD functionality:
   - **Create/Update** → Auto-save repo stats  
   - **Read** → View history list  
   - **Delete** → Remove from history  
-- 🎨 GitHub-style Dark UI  
-- ⚡ Minimal, beginner-friendly codebase  
-- 🔥 Perfect for learning FastAPI + API integration + CRUD logic  
+- GitHub-style Dark UI  
+- Minimal, beginner-friendly codebase  
+- Perfect for learning FastAPI + API integration + CRUD logic  
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 | Layer      | Tech                          |
 |------------|-------------------------------|
@@ -29,7 +29,7 @@ A clean, fast, GitHub-themed web app that lets you analyze any public GitHub rep
 | Charts     | Chart.js                      |
 | Auth       | GitHub Personal Access Token  |
 
-## 🔧 Installation & Setup
+## Installation & Setup
 
 ### **1️⃣ Clone the Repository**
 ```bash
@@ -76,7 +76,7 @@ uvicorn main:app --reload
 http://localhost:8000
 ```
 
-## 🧠 How It Works
+## How It Works
 
 - User enters a repository → frontend sends it to FastAPI
 - Backend fetches live GitHub data using httpx
@@ -87,7 +87,7 @@ http://localhost:8000
 
 
 
-## 📚 API Routes
+## API Routes
 
 - GET /api/repo-stats?repo=owner/repo
   - Fetch repo stats & auto-save to history.
@@ -96,7 +96,7 @@ http://localhost:8000
 - DELETE /api/history?full_name=owner/repo
   - Deletes the specified repo from the history database.
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```bash
 root/
@@ -107,7 +107,7 @@ root/
 └── README.md
 ```
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - Repo comparison mode
 - Cloud deployment (Render / Railway / Vercel)
